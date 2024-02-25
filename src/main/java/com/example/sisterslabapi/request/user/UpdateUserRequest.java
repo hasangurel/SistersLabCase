@@ -1,11 +1,12 @@
-package com.example.sisterslabapi.request;
+package com.example.sisterslabapi.request.user;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
 @Builder
 public record UpdateUserRequest(
-         @NotBlank Long id,
+         @NotNull Long id,
          String name,
 
          String username,

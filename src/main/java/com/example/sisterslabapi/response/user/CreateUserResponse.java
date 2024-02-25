@@ -1,4 +1,4 @@
-package com.example.sisterslabapi.response;
+package com.example.sisterslabapi.response.user;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
