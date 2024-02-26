@@ -1,4 +1,9 @@
 package com.example.sisterslabapi.response.comment;
 
-public record GetCommentResponse() {
+import lombok.Builder;
+
+@Builder
+public record GetCommentResponse(
+        String comment
+) {
 }

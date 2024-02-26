@@ -21,14 +21,7 @@ public class Rating {
     private Double rating;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "movie_id")
     private Movie movie;
-
-
-
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private User user;
 }

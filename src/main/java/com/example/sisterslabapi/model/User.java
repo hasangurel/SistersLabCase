@@ -1,5 +1,6 @@
 package com.example.sisterslabapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +25,7 @@ public class User {
 
     private String password;
     //when watchlist deleted user will not be deleted
-    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY,mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "user")
     private List<WatchList> watchLists;
     @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY,mappedBy = "user")
     private List<Rating> ratings;

@@ -1,4 +1,11 @@
 package com.example.sisterslabapi.response.comment;
 
-public record CreateCommentResponse() {
+import lombok.Builder;
+
+@Builder
+public record CreateCommentResponse(
+        Long userId,
+        Long movieId,
+        String comment
+) {
 }

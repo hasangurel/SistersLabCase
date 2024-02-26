@@ -3,7 +3,6 @@ package com.example.sisterslabapi.request.user;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 
-@Builder
 public record CreateUserRequest(
 
          @NotBlank String name,

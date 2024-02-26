@@ -28,7 +28,7 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id){
         service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
     @PutMapping("/update")
     public ResponseEntity<UpdateUserResponse> update(@RequestBody UpdateUserRequest request){

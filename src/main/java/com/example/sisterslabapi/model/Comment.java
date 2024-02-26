@@ -21,4 +21,9 @@ public class Comment {
     @JoinColumn(name = "movie_id")
     @JsonIgnore
     private Movie movie;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 }

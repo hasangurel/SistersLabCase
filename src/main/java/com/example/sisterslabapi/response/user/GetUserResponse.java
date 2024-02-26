@@ -1,5 +1,6 @@
 package com.example.sisterslabapi.response.user;
 
+import com.example.sisterslabapi.response.watchList.GetWatchListResponse;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 
@@ -14,5 +15,6 @@ public record GetUserResponse(
         String email,
 
         String password
+
 ) {
 }
