@@ -26,4 +26,6 @@ public class User {
     //when watchlist deleted user will not be deleted
     @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY,mappedBy = "user")
     private List<WatchList> watchLists;
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY,mappedBy = "user")
+    private List<Rating> ratings;
 }

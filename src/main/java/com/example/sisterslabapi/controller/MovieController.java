@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.sisterslabapi.service.MovieService;
-
 import java.util.List;
 
 @RestController
@@ -31,6 +30,11 @@ public class MovieController {
     public ResponseEntity<CreateMovieResponse> create(@RequestBody CreateMovieRequest request) {
         return new ResponseEntity<>(service.createMovie(request), HttpStatus.CREATED);
     }
+    @GetMapping("getAvgRating/{id}")
+    public ResponseEntity<Double> getAvgRating(@PathVariable Long id) {
+        return new ResponseEntity<>(service.getAverageRating(id), HttpStatus.OK);
+    }
+
     @PutMapping("/update")
     public ResponseEntity<UpdateMovieResponse> update(@RequestBody UpdateMovieRequest request) {
         return new ResponseEntity<>(service.updateMovie(request), HttpStatus.OK);

@@ -13,8 +13,8 @@ public record CreateMovieResponse(
 
         @NotBlank String description,
 
-        @NotBlank Date releaseDate,
-        Double rating
+        @NotBlank Date releaseDate
+
 
 ) {
 }

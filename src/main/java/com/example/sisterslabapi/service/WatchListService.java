@@ -3,7 +3,6 @@ package com.example.sisterslabapi.service;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.model.User;
 import com.example.sisterslabapi.model.WatchList;
-import com.example.sisterslabapi.repository.MovieRepository;
 import com.example.sisterslabapi.repository.WatchListRepository;
 import com.example.sisterslabapi.request.watchList.CreateWatchListRequest;
 import com.example.sisterslabapi.response.watchList.CreateWatchListResponse;
@@ -38,6 +37,25 @@ public class WatchListService {
                 .dateAdded(watchList.getDateAdded())
                 .watched(watchList.getWatched())
                 .build();
+    }
+    public void deleteAllByUserId(Long userId) {
+        User byId = userService.findById(userId);
+        byId.getWatchLists().forEach(watchList -> repository.deleteById(watchList.getId()));
+    }
+    public UpdateWatchListResponse setAsWatched(Long id) {
+        WatchList watchList = findById(id);
+        watchList.setWatched(true);
+        WatchList save = repository.save(watchList);
+        return UpdateWatchListResponse.builder()
+                .id(save.getId())
+                .user(save.getUser())
+                .movie(save.getMovie())
+                .dateAdded(save.getDateAdded())
+                .watched(save.getWatched())
+                .build();
+    }
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 
     public WatchList findById(Long id) {

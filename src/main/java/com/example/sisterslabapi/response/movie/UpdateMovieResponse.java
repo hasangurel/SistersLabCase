@@ -1,9 +1,11 @@
 package com.example.sisterslabapi.response.movie;
 
+import com.example.sisterslabapi.model.Rating;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 
 import java.util.Date;
+import java.util.List;
 
 @Builder
 public record UpdateMovieResponse(
@@ -15,6 +17,6 @@ public record UpdateMovieResponse(
 
         @NotBlank Date releaseDate,
 
-        @NotBlank Double rating
+        List<Rating> rating
 ) {
 }

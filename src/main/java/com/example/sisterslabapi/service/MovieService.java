@@ -1,12 +1,14 @@
 package com.example.sisterslabapi.service;
 
 import com.example.sisterslabapi.model.Movie;
+import com.example.sisterslabapi.model.Rating;
 import com.example.sisterslabapi.repository.MovieRepository;
 import com.example.sisterslabapi.request.movie.CreateMovieRequest;
 import com.example.sisterslabapi.request.movie.UpdateMovieRequest;
 import com.example.sisterslabapi.response.movie.CreateMovieResponse;
 import com.example.sisterslabapi.response.movie.GetMovieResponse;
 import com.example.sisterslabapi.response.movie.UpdateMovieResponse;
+import com.example.sisterslabapi.response.rating.GetRatingResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +30,7 @@ public class MovieService {
                     .name(movie.getName())
                     .description(movie.getDescription())
                     .releaseDate(movie.getReleaseDate())
-                    .rating(movie.getRating())
+                    .rating(movie.getRatings())
                     .build();
             responses.add(response);
         }
@@ -47,7 +49,6 @@ public class MovieService {
                 .name(save.getName())
                 .description(save.getDescription())
                 .releaseDate(save.getReleaseDate())
-                .rating(save.getRating())
                 .build();
     }
 
@@ -55,7 +56,7 @@ public class MovieService {
         Movie movie = findById(request.id());
         movie.setDescription(request.description());
         movie.setReleaseDate(request.releaseDate());
-        movie.setRating(request.rating());
+        movie.setRatings(request.rating());
         movie.setName(request.name());
         movie.setId(request.id());
         // save movie
@@ -65,10 +66,23 @@ public class MovieService {
                 .name(save.getName())
                 .description(save.getDescription())
                 .releaseDate(save.getReleaseDate())
-                .rating(save.getRating())
+                .rating(save.getRatings())
                 .build();
     }
+    public Double getAverageRating(Long id) {
+        Movie movie = findById(id);
+        if (movie.getRatings().isEmpty()) throw new RuntimeException("No ratings found for this movie.");
+        List<Rating> ratings = movie.getRatings();
+        Double totalRating = 0.0;
+        Integer ratingCount = 0;
+        Double averageRating = 0.0;
+        totalRating = ratings.stream().mapToDouble(Rating::getRating).sum();
+        ratingCount = ratings.size();
 
+        averageRating = totalRating / ratingCount;
+
+        return averageRating;
+    }
     public void delete(Long id) {
         repository.deleteById(id);
     }
@@ -80,7 +94,7 @@ public class MovieService {
                 .name(movie.getName())
                 .description(movie.getDescription())
                 .releaseDate(movie.getReleaseDate())
-                .rating(movie.getRating())
+                .rating(movie.getRatings())
                 .build();
     }
 
@@ -88,4 +102,8 @@ public class MovieService {
 
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Id not found"));
     }
+
+
+
+
 }
