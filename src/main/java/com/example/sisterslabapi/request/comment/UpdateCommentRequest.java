@@ -1,8 +1,7 @@
 package com.example.sisterslabapi.request.comment;
 
 public record UpdateCommentRequest(
-        Long userId,
-        Long movieId,
+        Long id,
         String comment
 ) {
 }
