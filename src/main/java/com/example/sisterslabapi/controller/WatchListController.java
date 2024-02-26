@@ -1,9 +1,9 @@
 package com.example.sisterslabapi.controller;
 
-import com.example.sisterslabapi.request.watchList.CreateWatchListRequest;
-import com.example.sisterslabapi.response.watchList.CreateWatchListResponse;
-import com.example.sisterslabapi.response.watchList.GetWatchListResponse;
-import com.example.sisterslabapi.response.watchList.UpdateWatchListResponse;
+import com.example.sisterslabapi.dto.request.watchList.CreateWatchListRequest;
+import com.example.sisterslabapi.dto.response.watchList.CreateWatchListResponse;
+import com.example.sisterslabapi.dto.response.watchList.GetWatchListResponse;
+import com.example.sisterslabapi.dto.response.watchList.UpdateWatchListResponse;
 import com.example.sisterslabapi.service.WatchListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

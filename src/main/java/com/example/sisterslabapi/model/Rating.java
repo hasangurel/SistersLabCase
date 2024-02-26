@@ -11,8 +11,8 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 
+@Data
 public class Rating {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
@@ -24,4 +24,8 @@ public class Rating {
     private Movie movie;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private User user;
+
+    public Rating(Double rating) {
+        this.rating = rating;
+    }
 }

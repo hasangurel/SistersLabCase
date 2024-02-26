@@ -2,10 +2,10 @@ package com.example.sisterslabapi.service;
 
 import com.example.sisterslabapi.model.Comment;
 import com.example.sisterslabapi.repository.CommentRepository;
-import com.example.sisterslabapi.request.comment.CreateCommentRequest;
-import com.example.sisterslabapi.request.comment.UpdateCommentRequest;
-import com.example.sisterslabapi.response.comment.CreateCommentResponse;
-import com.example.sisterslabapi.response.comment.UpdateCommentResponse;
+import com.example.sisterslabapi.dto.request.comment.CreateCommentRequest;
+import com.example.sisterslabapi.dto.request.comment.UpdateCommentRequest;
+import com.example.sisterslabapi.dto.response.comment.CreateCommentResponse;
+import com.example.sisterslabapi.dto.response.comment.UpdateCommentResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

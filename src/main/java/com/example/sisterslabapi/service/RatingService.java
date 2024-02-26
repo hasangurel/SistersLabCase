@@ -4,17 +4,13 @@ import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.model.Rating;
 import com.example.sisterslabapi.model.User;
 import com.example.sisterslabapi.repository.RatingRepository;
-import com.example.sisterslabapi.request.rating.CreateRatingRequest;
-import com.example.sisterslabapi.request.rating.UpdateRatingRequest;
-import com.example.sisterslabapi.response.movie.GetMovieResponse;
-import com.example.sisterslabapi.response.rating.CreateRatingResponse;
-import com.example.sisterslabapi.response.rating.GetRatingResponse;
-import com.example.sisterslabapi.response.rating.UpdateRatingResponse;
+import com.example.sisterslabapi.dto.request.rating.CreateRatingRequest;
+import com.example.sisterslabapi.dto.request.rating.UpdateRatingRequest;
+import com.example.sisterslabapi.dto.response.rating.CreateRatingResponse;
+import com.example.sisterslabapi.dto.response.rating.GetRatingResponse;
+import com.example.sisterslabapi.dto.response.rating.UpdateRatingResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

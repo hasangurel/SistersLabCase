@@ -3,17 +3,18 @@ package com.example.sisterslabapi.service;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.model.Rating;
 import com.example.sisterslabapi.repository.MovieRepository;
-import com.example.sisterslabapi.request.movie.CreateMovieRequest;
-import com.example.sisterslabapi.request.movie.UpdateMovieRequest;
-import com.example.sisterslabapi.response.movie.CreateMovieResponse;
-import com.example.sisterslabapi.response.movie.GetMovieResponse;
-import com.example.sisterslabapi.response.movie.UpdateMovieResponse;
-import com.example.sisterslabapi.response.rating.GetRatingResponse;
+import com.example.sisterslabapi.dto.request.movie.CreateMovieRequest;
+import com.example.sisterslabapi.dto.request.movie.UpdateMovieRequest;
+import com.example.sisterslabapi.dto.response.movie.CreateMovieResponse;
+import com.example.sisterslabapi.dto.response.movie.GetMovieResponse;
+import com.example.sisterslabapi.dto.response.movie.UpdateMovieResponse;
+import com.example.sisterslabapi.dto.response.rating.GetRatingResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +31,9 @@ public class MovieService {
                     .name(movie.getName())
                     .description(movie.getDescription())
                     .releaseDate(movie.getReleaseDate())
-                    .rating(movie.getRatings())
+                    .rating(movie.getRatings().stream().map(rating -> GetRatingResponse.builder()
+                            .rating(rating.getRating())
+                            .build()).collect(Collectors.toList()))
                     .build();
             responses.add(response);
         }
@@ -94,7 +97,9 @@ public class MovieService {
                 .name(movie.getName())
                 .description(movie.getDescription())
                 .releaseDate(movie.getReleaseDate())
-                .rating(movie.getRatings())
+                .rating(movie.getRatings().stream().map(rating -> GetRatingResponse.builder()
+                        .rating(rating.getRating())
+                        .build()).collect(Collectors.toList()))
                 .build();
     }
 

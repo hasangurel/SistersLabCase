@@ -1,10 +1,10 @@
 package com.example.sisterslabapi.controller;
 
-import com.example.sisterslabapi.request.movie.CreateMovieRequest;
-import com.example.sisterslabapi.request.movie.UpdateMovieRequest;
-import com.example.sisterslabapi.response.movie.CreateMovieResponse;
-import com.example.sisterslabapi.response.movie.GetMovieResponse;
-import com.example.sisterslabapi.response.movie.UpdateMovieResponse;
+import com.example.sisterslabapi.dto.request.movie.CreateMovieRequest;
+import com.example.sisterslabapi.dto.request.movie.UpdateMovieRequest;
+import com.example.sisterslabapi.dto.response.movie.CreateMovieResponse;
+import com.example.sisterslabapi.dto.response.movie.GetMovieResponse;
+import com.example.sisterslabapi.dto.response.movie.UpdateMovieResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,10 @@
 package com.example.sisterslabapi.controller;
 
-import com.example.sisterslabapi.request.user.CreateUserRequest;
-import com.example.sisterslabapi.request.user.UpdateUserRequest;
-import com.example.sisterslabapi.response.user.CreateUserResponse;
-import com.example.sisterslabapi.response.user.GetUserResponse;
-import com.example.sisterslabapi.response.user.UpdateUserResponse;
+import com.example.sisterslabapi.dto.request.user.CreateUserRequest;
+import com.example.sisterslabapi.dto.request.user.UpdateUserRequest;
+import com.example.sisterslabapi.dto.response.user.CreateUserResponse;
+import com.example.sisterslabapi.dto.response.user.GetUserResponse;
+import com.example.sisterslabapi.dto.response.user.UpdateUserResponse;
 import com.example.sisterslabapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
