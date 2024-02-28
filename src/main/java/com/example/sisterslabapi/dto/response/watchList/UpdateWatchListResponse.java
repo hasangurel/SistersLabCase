@@ -1,5 +1,7 @@
 package com.example.sisterslabapi.dto.response.watchList;
 
+import com.example.sisterslabapi.dto.response.movie.GetMovieResponse;
+import com.example.sisterslabapi.dto.response.user.GetUserResponse;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.model.User;
 import lombok.Builder;
@@ -11,9 +13,9 @@ import java.util.List;
 public record UpdateWatchListResponse(
         Long id,
 
-        User user,
+        GetUserResponse user,
 
-        Movie movie,
+        GetMovieResponse movie,
         Date dateAdded,
 
         Boolean watched

@@ -34,9 +34,9 @@ public class UserController {
     public ResponseEntity<UpdateUserResponse> update(@RequestBody UpdateUserRequest request){
         return new ResponseEntity<>(service.updateUser(request), HttpStatus.OK);
     }
-    @PutMapping("/updatePassword/{id}/{password}")
-    public ResponseEntity<UpdateUserResponse> updatePassword(@RequestParam("password") String password, @RequestParam("id") Long id){
-        return new ResponseEntity<>(service.updateUserPassword(password, id), HttpStatus.OK);
+    @PutMapping("/updatePassword")
+    public ResponseEntity<UpdateUserResponse> updatePassword(@RequestBody UpdateUserRequest request){
+        return new ResponseEntity<>(service.updateUserPassword(request), HttpStatus.OK);
     }
     @GetMapping("/get/{id}")
     public ResponseEntity<GetUserResponse> get(@PathVariable("id") Long id){

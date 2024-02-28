@@ -26,7 +26,7 @@ public class MovieController {
     public ResponseEntity<GetMovieResponse> get(@PathVariable Long id) {
         return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<CreateMovieResponse> create(@RequestBody CreateMovieRequest request) {
         return new ResponseEntity<>(service.createMovie(request), HttpStatus.CREATED);
     }

@@ -1,5 +1,6 @@
 package com.example.sisterslabapi.service;
 
+import com.example.sisterslabapi.dto.converter.UserConverter;
 import com.example.sisterslabapi.model.User;
 import com.example.sisterslabapi.repository.UserRepository;
 import com.example.sisterslabapi.dto.request.user.CreateUserRequest;
@@ -10,87 +11,40 @@ import com.example.sisterslabapi.dto.response.user.UpdateUserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository repository;
+    private final UserConverter converter;
+
     public void delete(Long id) {
-        repository.deleteById(id);
+        repository.delete(findById(id));
     }
+
     public GetUserResponse getUser(Long id) {
-        User user = findById(id);
-        return GetUserResponse.builder()
-                .id(user.getId())
-                .name(user.getName())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .password(user.getPassword())
-                .build();
+        return converter.convertEntityToGetResponse(findById(id));
     }
+
     public List<GetUserResponse> getAll() {
-        List<User> all = repository.findAll();
-        List<GetUserResponse> responses = new ArrayList<>();
-
-        for (User user : all) {
-            GetUserResponse response = GetUserResponse.builder()
-                    .id(user.getId())
-                    .name(user.getName())
-                    .username(user.getUsername())
-                    .email(user.getEmail())
-                    .password(user.getPassword())
-                    .build();
-            responses.add(response);
-        }
-
-        return responses;
+        return converter.convertEntityToGetAllResponse(repository.findAll());
     }
-    public UpdateUserResponse updateUserPassword(String password, Long id) {
-        User user = findById(id);
-        user.setPassword(password);
-        User save = repository.save(user);
-        return UpdateUserResponse.builder()
-                .id(save.getId())
-                .name(save.getName())
-                .username(save.getUsername())
-                .email(save.getEmail())
-                .password(save.getPassword())
-                .build();
+
+    public UpdateUserResponse updateUserPassword(UpdateUserRequest request) {
+        findById(request.id()).setPassword(request.password());
+        return converter.convertEntityToUpdateResponse(repository.save(findById(request.id())));
     }
 
 
     public CreateUserResponse createUser(CreateUserRequest request) {
-            User user=new User();
-            user.setName(request.name());
-            user.setUsername(request.username());
-            user.setEmail(request.email());
-            user.setPassword(request.password());
-            repository.save(user);
-        return CreateUserResponse.builder()
-                .name(request.name())
-                .username(request.username())
-                .email(request.email())
-                .password(request.password())
-                .build();
+        return converter.convertEntityToCreateResponse(converter.convertCreateRequestToEntity(request));
     }
+
     public UpdateUserResponse updateUser(UpdateUserRequest request) {
-        User user = findById(request.id());
-        user.setEmail(request.email());
-        user.setName(request.name());
-        user.setPassword(request.password());
-        user.setUsername(request.username());
-        // save user
-        User save = repository.save(user);
-        return UpdateUserResponse.builder()
-                .id(user.getId())
-                .name(user.getName())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .password(user.getPassword())
-                .build();
+        return converter.convertEntityToUpdateResponse(converter.convertUpdateRequestToEntity(request));
     }
+
     public User findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Id not found"));
     }
