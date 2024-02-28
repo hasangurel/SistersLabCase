@@ -13,8 +13,7 @@ public record UpdateMovieRequest(
 
         String description,
 
-        Date releaseDate,
+        Date releaseDate
 
-        List<Rating> rating
 ) {
 }

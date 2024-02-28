@@ -1,5 +1,6 @@
 package com.example.sisterslabapi.dto.response.movie;
 
+import com.example.sisterslabapi.dto.response.rating.GetRatingResponse;
 import com.example.sisterslabapi.model.Rating;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
@@ -17,6 +18,6 @@ public record UpdateMovieResponse(
 
         @NotBlank Date releaseDate,
 
-        List<Rating> rating
+        List<GetRatingResponse> rating
 ) {
 }
