@@ -4,7 +4,7 @@ import lombok.Builder;
 
 
 public record CreateRatingRequest(
-        Long userId,
+         Long userId,
          Double rating,
          Long movieId
 ) {

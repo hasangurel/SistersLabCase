@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.sisterslabapi.service.MovieService;
+
 import java.util.List;
 
 @RestController
@@ -22,14 +23,17 @@ public class MovieController {
     public ResponseEntity<List<GetMovieResponse>> getAll() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
+
     @GetMapping("/get/{id}")
     public ResponseEntity<GetMovieResponse> get(@PathVariable Long id) {
         return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
+
     @PostMapping
     public ResponseEntity<CreateMovieResponse> create(@RequestBody CreateMovieRequest request) {
         return new ResponseEntity<>(service.createMovie(request), HttpStatus.CREATED);
     }
+
     @GetMapping("getAvgRating/{id}")
     public ResponseEntity<Double> getAvgRating(@PathVariable Long id) {
         return new ResponseEntity<>(service.getAverageRating(id), HttpStatus.OK);
@@ -39,10 +43,16 @@ public class MovieController {
     public ResponseEntity<UpdateMovieResponse> update(@RequestBody UpdateMovieRequest request) {
         return new ResponseEntity<>(service.updateMovie(request), HttpStatus.OK);
     }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.CONFLICT);
+    }
+
+    @GetMapping("/getAllMoviesByCategoryName/{name}")
+    public ResponseEntity<List<GetMovieResponse>> getCategoryById(@PathVariable String name) {
+        return new ResponseEntity<>(service.getAllMovieByCategoryName(name), HttpStatus.OK);
     }
 
 }

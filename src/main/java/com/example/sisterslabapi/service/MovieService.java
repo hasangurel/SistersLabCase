@@ -8,6 +8,7 @@ import com.example.sisterslabapi.dto.response.movie.GetMovieResponse;
 import com.example.sisterslabapi.dto.response.movie.UpdateMovieResponse;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.model.Rating;
+import com.example.sisterslabapi.repository.CategoryRepository;
 import com.example.sisterslabapi.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.List;
 public class MovieService {
     private final MovieRepository repository;
     private final MovieConverter converter;
+    private final CategoryRepository categoryRepository;
 
     public List<GetMovieResponse> getAll() {
         return converter.convertEntityToGetAllResponse(repository.findAll());
@@ -30,6 +32,10 @@ public class MovieService {
 
     public UpdateMovieResponse updateMovie(UpdateMovieRequest request) {
         return converter.convertEntityToUpdateResponse(repository.save(converter.convertUpdateRequestToEntity(request)));
+    }
+
+    public List<GetMovieResponse> getAllMovieByCategoryName(String name) {
+        return converter.convertEntityToGetAllResponse(categoryRepository.findByName(name).getMovies());
     }
 
     public Double getAverageRating(Long id) {
@@ -47,6 +53,4 @@ public class MovieService {
     public Movie findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Movie not found."));
     }
-
-
 }

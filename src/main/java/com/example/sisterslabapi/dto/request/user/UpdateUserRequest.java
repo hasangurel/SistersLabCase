@@ -5,13 +5,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
 public record UpdateUserRequest(
-         @NotNull Long id,
+        @NotNull Long id,
          String name,
-
          String username,
-
          String email,
-
          String password
 ) {
 }

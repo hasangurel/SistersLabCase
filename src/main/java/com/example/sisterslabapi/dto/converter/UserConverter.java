@@ -26,11 +26,13 @@ public class UserConverter {
                 .password(user.getPassword())
                 .build();
     }
+
     public List<GetUserResponse> convertEntityToGetAllResponse(List<User> users) {
         return users.stream()
                 .map(this::convertEntityToGetResponse)
                 .toList();
     }
+
     public UpdateUserResponse convertEntityToUpdateResponse(User user) {
         return UpdateUserResponse.builder()
                 .id(user.getId())
@@ -40,6 +42,7 @@ public class UserConverter {
                 .password(user.getPassword())
                 .build();
     }
+
     public User convertUpdateRequestToEntity(UpdateUserRequest request) {
         User user = findById(request.id());
         user.setEmail(request.email());
@@ -48,6 +51,7 @@ public class UserConverter {
         user.setUsername(request.username());
         return user;
     }
+
     public CreateUserResponse convertEntityToCreateResponse(User user) {
         userRepository.save(user);
         return CreateUserResponse.builder()
@@ -57,6 +61,7 @@ public class UserConverter {
                 .password(user.getPassword())
                 .build();
     }
+
     public User convertCreateRequestToEntity(CreateUserRequest request) {
         User user = new User();
         user.setEmail(request.email());
@@ -65,6 +70,7 @@ public class UserConverter {
         user.setUsername(request.username());
         return user;
     }
+
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Id not found"));
     }

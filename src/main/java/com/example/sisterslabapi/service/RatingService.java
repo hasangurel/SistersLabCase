@@ -18,7 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RatingService {
     private final RatingRepository repository;
-
     private final RatingConverter converter;
 
     public CreateRatingResponse create(CreateRatingRequest request) {

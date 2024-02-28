@@ -6,14 +6,12 @@ import com.example.sisterslabapi.dto.response.comment.CreateCommentResponse;
 import com.example.sisterslabapi.dto.response.comment.GetCommentResponse;
 import com.example.sisterslabapi.dto.response.comment.UpdateCommentResponse;
 import com.example.sisterslabapi.model.Comment;
-import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.repository.CommentRepository;
 import com.example.sisterslabapi.repository.MovieRepository;
 import com.example.sisterslabapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -49,9 +47,10 @@ public class CommentConverter {
         findById(request.id()).setComment(request.comment());
         return findById(request.id());
     }
+
     public List<GetCommentResponse> convertEntityToGetAllResponse(List<Comment> comments) {
 
-        return  comments.stream().map(comment -> GetCommentResponse.builder()
+        return comments.stream().map(comment -> GetCommentResponse.builder()
                 .comment(comment.getComment())
                 .build()).toList();
     }

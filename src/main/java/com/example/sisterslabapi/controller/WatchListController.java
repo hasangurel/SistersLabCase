@@ -22,10 +22,12 @@ public class WatchListController {
     public ResponseEntity<CreateWatchListResponse> create(@RequestBody CreateWatchListRequest request) {
         return new ResponseEntity<>(watchListService.createWatchList(request), HttpStatus.CREATED);
     }
+
     @PutMapping("/watched/{id}")
     public ResponseEntity<UpdateWatchListResponse> setAsWatched(@PathVariable Long id) {
         return new ResponseEntity<>(watchListService.setAsWatched(id), HttpStatus.OK);
     }
+
     @PutMapping("/notWatched/{id}")
     public ResponseEntity<UpdateWatchListResponse> setAsNotWatched(@PathVariable Long id) {
         return new ResponseEntity<>(watchListService.setAsNotWatched(id), HttpStatus.OK);
@@ -36,11 +38,13 @@ public class WatchListController {
         watchListService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @GetMapping("/get/byUserId/{id}")
     public ResponseEntity<List<GetWatchListResponse>> getAllByUserId(@PathVariable Long id) {
 
-        return new ResponseEntity<>(watchListService.getByUserID(id),HttpStatus.OK);
+        return new ResponseEntity<>(watchListService.getByUserID(id), HttpStatus.OK);
     }
+
     @DeleteMapping("/delete/byUserId/{id}")
     public ResponseEntity<Void> deleteAllByUserId(@PathVariable Long id) {
         watchListService.deleteAllByUserId(id);

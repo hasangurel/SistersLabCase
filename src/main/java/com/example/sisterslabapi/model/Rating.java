@@ -24,8 +24,4 @@ public class Rating {
     private Movie movie;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private User user;
-
-    public Rating(Double rating) {
-        this.rating = rating;
-    }
 }

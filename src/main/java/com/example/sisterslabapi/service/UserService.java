@@ -36,7 +36,6 @@ public class UserService {
         return converter.convertEntityToUpdateResponse(repository.save(findById(request.id())));
     }
 
-
     public CreateUserResponse createUser(CreateUserRequest request) {
         return converter.convertEntityToCreateResponse(converter.convertCreateRequestToEntity(request));
     }
@@ -48,5 +47,4 @@ public class UserService {
     public User findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Id not found"));
     }
-
 }

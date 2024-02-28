@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class WatchList {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -22,6 +21,7 @@ public class WatchList {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private User user;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "movie_id")
     private Movie movie;

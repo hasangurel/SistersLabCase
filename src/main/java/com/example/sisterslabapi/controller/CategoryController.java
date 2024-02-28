@@ -19,30 +19,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryService categoryService;
+
     @PostMapping("/create")
-    public ResponseEntity<CreateCategoryResponse> createCategory(@RequestBody CreateCategoryRequest request){
+    public ResponseEntity<CreateCategoryResponse> createCategory(@RequestBody CreateCategoryRequest request) {
         return new ResponseEntity<>(categoryService.create(request), HttpStatus.CREATED);
     }
+
     @PutMapping("/update/movies")
-    public ResponseEntity<UpdateCategoryResponse> updateCategory(@RequestBody UpdateCategoryRequest request){
+    public ResponseEntity<UpdateCategoryResponse> updateCategory(@RequestBody UpdateCategoryRequest request) {
         return new ResponseEntity<>(categoryService.updateMovies(request), HttpStatus.OK);
     }
+
     @PutMapping("/update/name")
-    public ResponseEntity<UpdateCategoryResponse> updateCategoryName(@RequestBody UpdateCategoryRequest request){
+    public ResponseEntity<UpdateCategoryResponse> updateCategoryName(@RequestBody UpdateCategoryRequest request) {
         return new ResponseEntity<>(categoryService.updateNameById(request), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Long id){
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
     @GetMapping("/getAll")
-    public ResponseEntity<List<GetCategoryResponse>> getCategory(){
+    public ResponseEntity<List<GetCategoryResponse>> getCategory() {
         return new ResponseEntity<>(categoryService.getAll(), HttpStatus.OK);
     }
-    @GetMapping("/getAllMoviesByCategoryName/{name}")
-    public ResponseEntity<List<GetMovieResponse> > getCategoryById(@PathVariable String name){
-        return new ResponseEntity<>(categoryService.getAllMovieByCategoryName(name), HttpStatus.OK);
-    }
+
 }

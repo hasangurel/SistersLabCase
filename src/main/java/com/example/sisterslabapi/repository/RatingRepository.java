@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface RatingRepository extends JpaRepository<Rating, Long> {
     Rating findByUserIdAndMovieId(Long userId, Long movieId);
-    List<Rating> findAllByUserIdAndMovieId(Long userId, Long movieId);
 }

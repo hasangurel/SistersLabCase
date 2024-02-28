@@ -30,6 +30,7 @@ public class RatingConverter {
                 .rating(rating.getRating())
                 .build();
     }
+
     public Rating convertCreateRatingRequestToEntity(CreateRatingRequest request) {
         Rating rating = new Rating();
         User user = userRepository.findById(request.userId()).orElseThrow(() -> new RuntimeException("User not found"));
@@ -43,22 +44,26 @@ public class RatingConverter {
         ratingRepository.save(rating);
         return rating;
     }
+
     public GetRatingResponse convertEntityToGetRatingResponse(Rating rating) {
         return GetRatingResponse.builder()
                 .rating(rating.getRating())
                 .build();
     }
+
     public List<GetRatingResponse> convertEntityToGetAllRatingResponse(List<Rating> ratings) {
         return ratings.stream().map(rating -> GetRatingResponse.builder()
                 .rating(rating.getRating())
                 .build()).toList();
     }
+
     public Rating convertUpdateRatingRequestToEntity(UpdateRatingRequest request) {
         Rating rating = ratingRepository.findByUserIdAndMovieId(request.userId(), request.movieId());
         rating.setRating(request.rating());
         ratingRepository.save(rating);
         return rating;
     }
+
     public UpdateRatingResponse convertEntityToUpdateRatingResponse(Rating rating) {
         return UpdateRatingResponse.builder()
                 .rating(rating.getRating())
