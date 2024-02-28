@@ -12,6 +12,8 @@ import com.example.sisterslabapi.dto.response.rating.UpdateRatingResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RatingService {
@@ -40,6 +42,14 @@ public class RatingService {
         return GetRatingResponse.builder()
                 .rating(rating.getRating())
                 .build();
+    }
+    public List<GetRatingResponse> getRatingByMovieId(Long movieId) {
+        Movie movie = movieService.findById(movieId);
+        List<Rating> ratings = movie.getRatings();
+        List<GetRatingResponse> responses = ratings.stream().map(rating -> GetRatingResponse.builder()
+                .rating(rating.getRating())
+                .build()).toList();
+        return responses;
     }
     public UpdateRatingResponse update(UpdateRatingRequest request) {
         Rating rating = repository.findByUserIdAndMovieId(request.userId(), request.movieId());
