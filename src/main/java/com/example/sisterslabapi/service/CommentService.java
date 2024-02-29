@@ -3,6 +3,8 @@ package com.example.sisterslabapi.service;
 import com.example.sisterslabapi.dto.converter.CommentConverter;
 import com.example.sisterslabapi.dto.response.comment.GetCommentResponse;
 import com.example.sisterslabapi.dto.response.movie.GetMovieResponse;
+import com.example.sisterslabapi.exception.Constant;
+import com.example.sisterslabapi.exception.MovieIdNotFoundException;
 import com.example.sisterslabapi.model.Comment;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.repository.CommentRepository;
@@ -30,7 +32,7 @@ public class CommentService {
     }
 
     public List<GetCommentResponse> getCommentByMovieId(Long movieId) {
-        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
+        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieIdNotFoundException(Constant.MOVIE_ID_NOT_FOUND));
         return converter.convertEntityToGetAllResponse(movie.getComments());
     }
 

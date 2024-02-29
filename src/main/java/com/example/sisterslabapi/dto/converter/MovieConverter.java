@@ -17,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MovieConverter {
     private final MovieRepository repository;
-    private final RatingConverter ratingConverter;
 
     public List<GetMovieResponse> convertEntityToGetAllResponse(List<Movie> movies) {
         return movies.stream()
@@ -45,7 +44,6 @@ public class MovieConverter {
     }
 
     public Movie convertUpdateRequestToEntity(UpdateMovieRequest request) {
-
         Movie movie = findById(request.id());
         movie.setDescription(request.description());
         movie.setReleaseDate(request.releaseDate());
@@ -85,8 +83,6 @@ public class MovieConverter {
     }
 
     public Movie findById(Long id) {
-
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Id not found"));
     }
-    //entity to response
 }
