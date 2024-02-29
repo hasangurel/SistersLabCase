@@ -1,17 +1,16 @@
 package com.example.sisterslabapi.service;
 
 import com.example.sisterslabapi.dto.converter.CommentConverter;
+import com.example.sisterslabapi.dto.request.comment.CreateCommentRequest;
+import com.example.sisterslabapi.dto.request.comment.UpdateCommentRequest;
+import com.example.sisterslabapi.dto.response.comment.CreateCommentResponse;
 import com.example.sisterslabapi.dto.response.comment.GetCommentResponse;
-import com.example.sisterslabapi.dto.response.movie.GetMovieResponse;
+import com.example.sisterslabapi.dto.response.comment.UpdateCommentResponse;
 import com.example.sisterslabapi.exception.Constant;
 import com.example.sisterslabapi.exception.MovieIdNotFoundException;
 import com.example.sisterslabapi.model.Comment;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.repository.CommentRepository;
-import com.example.sisterslabapi.dto.request.comment.CreateCommentRequest;
-import com.example.sisterslabapi.dto.request.comment.UpdateCommentRequest;
-import com.example.sisterslabapi.dto.response.comment.CreateCommentResponse;
-import com.example.sisterslabapi.dto.response.comment.UpdateCommentResponse;
 import com.example.sisterslabapi.repository.MovieRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

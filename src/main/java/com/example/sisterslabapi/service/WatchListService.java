@@ -1,25 +1,21 @@
 package com.example.sisterslabapi.service;
 
 import com.example.sisterslabapi.dto.converter.WatchListConverter;
-import com.example.sisterslabapi.exception.Constant;
-import com.example.sisterslabapi.exception.UserIdNotFoundException;
-import com.example.sisterslabapi.exception.WatchListIdNotFound;
-import com.example.sisterslabapi.model.Movie;
-import com.example.sisterslabapi.model.User;
-import com.example.sisterslabapi.model.WatchList;
-import com.example.sisterslabapi.repository.MovieRepository;
-import com.example.sisterslabapi.repository.UserRepository;
-import com.example.sisterslabapi.repository.WatchListRepository;
 import com.example.sisterslabapi.dto.request.watchList.CreateWatchListRequest;
 import com.example.sisterslabapi.dto.response.watchList.CreateWatchListResponse;
 import com.example.sisterslabapi.dto.response.watchList.GetWatchListResponse;
 import com.example.sisterslabapi.dto.response.watchList.UpdateWatchListResponse;
+import com.example.sisterslabapi.exception.Constant;
+import com.example.sisterslabapi.exception.UserIdNotFoundException;
+import com.example.sisterslabapi.exception.WatchListIdNotFound;
+import com.example.sisterslabapi.model.User;
+import com.example.sisterslabapi.model.WatchList;
+import com.example.sisterslabapi.repository.UserRepository;
+import com.example.sisterslabapi.repository.WatchListRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
