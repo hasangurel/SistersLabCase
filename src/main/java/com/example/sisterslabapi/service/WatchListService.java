@@ -1,6 +1,9 @@
 package com.example.sisterslabapi.service;
 
 import com.example.sisterslabapi.dto.converter.WatchListConverter;
+import com.example.sisterslabapi.exception.Constant;
+import com.example.sisterslabapi.exception.UserIdNotFoundException;
+import com.example.sisterslabapi.exception.WatchListIdNotFound;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.model.User;
 import com.example.sisterslabapi.model.WatchList;
@@ -32,7 +35,7 @@ public class WatchListService {
 
     @Transactional
     public void deleteAllByUserId(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserIdNotFoundException(Constant.USER_ID_NOT_FOUND));
         repository.deleteAllByUser(user);
     }
 
@@ -51,13 +54,13 @@ public class WatchListService {
     }
 
     public List<GetWatchListResponse> getByUserID(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findById(id).orElseThrow(() -> new UserIdNotFoundException(Constant.USER_ID_NOT_FOUND));
         return converter.convertEntityToGetAllResponse(user.getWatchLists());
     }
 
     public WatchList findById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("WatchList not found"));
+                .orElseThrow(() -> new WatchListIdNotFound(Constant.WATCH_LIST_ID_NOT_FOUND));
     }
 }
 

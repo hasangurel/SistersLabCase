@@ -19,22 +19,22 @@ import java.util.List;
 public class RatingController {
     private final RatingService service;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<CreateRatingResponse> create(@RequestBody CreateRatingRequest request) {
         return new ResponseEntity<>(service.create(request), HttpStatus.CREATED);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<GetRatingResponse> get(@PathVariable Long id) {
         return new ResponseEntity<>(service.getRating(id), HttpStatus.OK);
     }
 
-    @GetMapping("/getByMovieId/{movieId}")
+    @GetMapping("ByMovieId/{movieId}")
     public ResponseEntity<List<GetRatingResponse>> getByMovieId(@PathVariable Long movieId) {
         return new ResponseEntity<>(service.getRatingByMovieId(movieId), HttpStatus.OK);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<UpdateRatingResponse> update(@RequestBody UpdateRatingRequest request) {
         return new ResponseEntity<>(service.update(request), HttpStatus.OK);
     }

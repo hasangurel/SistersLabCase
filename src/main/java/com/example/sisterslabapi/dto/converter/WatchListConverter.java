@@ -4,6 +4,11 @@ import com.example.sisterslabapi.dto.request.watchList.CreateWatchListRequest;
 import com.example.sisterslabapi.dto.response.watchList.CreateWatchListResponse;
 import com.example.sisterslabapi.dto.response.watchList.GetWatchListResponse;
 import com.example.sisterslabapi.dto.response.watchList.UpdateWatchListResponse;
+import com.example.sisterslabapi.exception.Constant;
+import com.example.sisterslabapi.exception.UserAlreadyAddedThisMovieException;
+import com.example.sisterslabapi.exception.UserHasNotWatchListError;
+import com.example.sisterslabapi.model.Movie;
+import com.example.sisterslabapi.model.User;
 import com.example.sisterslabapi.model.WatchList;
 import com.example.sisterslabapi.repository.MovieRepository;
 import com.example.sisterslabapi.repository.UserRepository;
@@ -33,13 +38,18 @@ public class WatchListConverter {
                 .build();
     }
     public WatchList convertCreateRequestToEntity(CreateWatchListRequest request) {
+        Movie movie = movieRepository.findById(request.movieId())
+                .orElseThrow(() -> new RuntimeException("Movie not found"));
+        User user = userRepository.findById(request.userId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        if(repository.findByMovieAndUser(movie, user) != null) {
+            throw new UserAlreadyAddedThisMovieException(Constant.USER_ALREADY_ADD_THIS_WATCHLIST);
+        }
         WatchList watchList = new WatchList();
         watchList.setDateAdded(new Date());
         watchList.setWatched(false);
-        watchList.setMovie(movieRepository.findById(request.movieId())
-                .orElseThrow(() -> new RuntimeException("Movie not found")));
-        watchList.setUser(userRepository.findById(request.userId())
-                .orElseThrow(() -> new RuntimeException("User not found")));
+        watchList.setMovie(movie);
+        watchList.setUser(user);
         return watchList;
     }
     public UpdateWatchListResponse convertEntityToUpdateResponse(WatchList watchList) {

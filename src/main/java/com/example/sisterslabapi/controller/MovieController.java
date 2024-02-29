@@ -19,12 +19,12 @@ import java.util.List;
 public class MovieController {
     private final MovieService service;
 
-    @GetMapping("/getAll")
+    @GetMapping("/All")
     public ResponseEntity<List<GetMovieResponse>> getAll() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<GetMovieResponse> get(@PathVariable Long id) {
         return new ResponseEntity<>(service.get(id), HttpStatus.OK);
     }
@@ -34,23 +34,23 @@ public class MovieController {
         return new ResponseEntity<>(service.createMovie(request), HttpStatus.CREATED);
     }
 
-    @GetMapping("getAvgRating/{id}")
+    @GetMapping("AvgRating/{id}")
     public ResponseEntity<Double> getAvgRating(@PathVariable Long id) {
         return new ResponseEntity<>(service.getAverageRating(id), HttpStatus.OK);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<UpdateMovieResponse> update(@RequestBody UpdateMovieRequest request) {
         return new ResponseEntity<>(service.updateMovie(request), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
-    @GetMapping("/getAllMoviesByCategoryName/{name}")
+    @GetMapping("MoviesByCategoryName/{name}")
     public ResponseEntity<List<GetMovieResponse>> getCategoryById(@PathVariable String name) {
         return new ResponseEntity<>(service.getAllMovieByCategoryName(name), HttpStatus.OK);
     }

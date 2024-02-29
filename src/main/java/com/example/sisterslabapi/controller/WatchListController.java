@@ -18,12 +18,12 @@ import java.util.List;
 public class WatchListController {
     private final WatchListService watchListService;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<CreateWatchListResponse> create(@RequestBody CreateWatchListRequest request) {
         return new ResponseEntity<>(watchListService.createWatchList(request), HttpStatus.CREATED);
     }
 
-    @PutMapping("/watched/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<UpdateWatchListResponse> setAsWatched(@PathVariable Long id) {
         return new ResponseEntity<>(watchListService.setAsWatched(id), HttpStatus.OK);
     }
@@ -33,19 +33,19 @@ public class WatchListController {
         return new ResponseEntity<>(watchListService.setAsNotWatched(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         watchListService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/get/byUserId/{id}")
+    @GetMapping("/byUserId/{id}")
     public ResponseEntity<List<GetWatchListResponse>> getAllByUserId(@PathVariable Long id) {
 
         return new ResponseEntity<>(watchListService.getByUserID(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/byUserId/{id}")
+    @DeleteMapping("/byUserId/{id}")
     public ResponseEntity<Void> deleteAllByUserId(@PathVariable Long id) {
         watchListService.deleteAllByUserId(id);
         return new ResponseEntity<>(HttpStatus.OK);

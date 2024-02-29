@@ -20,33 +20,33 @@ import java.util.List;
 public class UserController {
     private final UserService service;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<CreateUserResponse> create(@RequestBody CreateUserRequest request) {
         return new ResponseEntity<>(service.createUser(request), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<UpdateUserResponse> update(@RequestBody UpdateUserRequest request) {
         return new ResponseEntity<>(service.updateUser(request), HttpStatus.OK);
     }
 
-    @PutMapping("/updatePassword")
+    @PutMapping("/Password")
     public ResponseEntity<UpdateUserResponse> updatePassword(@RequestBody UpdateUserRequest request) {
         return new ResponseEntity<>(service.updateUserPassword(request), HttpStatus.OK);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<GetUserResponse> get(@PathVariable("id") Long id) {
         return new ResponseEntity<>(service.getUser(id), HttpStatus.OK);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/All")
     public ResponseEntity<List<GetUserResponse>> getAll() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }

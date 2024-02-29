@@ -4,6 +4,7 @@ import com.example.sisterslabapi.dto.request.category.CreateCategoryRequest;
 import com.example.sisterslabapi.dto.response.category.CreateCategoryResponse;
 import com.example.sisterslabapi.dto.response.category.GetCategoryResponse;
 import com.example.sisterslabapi.dto.response.category.UpdateCategoryResponse;
+import com.example.sisterslabapi.exception.CategoryAlreadyExistException;
 import com.example.sisterslabapi.model.Category;
 import com.example.sisterslabapi.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,9 @@ public class CategoryConverter {
     private final MovieConverter movieConverter;
 
     public Category convertCreateRequestToEntity(CreateCategoryRequest request) {
+       if (repository.findByName(request.name()) != null) {
+           throw new CategoryAlreadyExistException("Category already exists");
+       }
         Category category = new Category();
         category.setName(request.name());
         return category;

@@ -20,23 +20,23 @@ import java.util.List;
 public class CommentController {
     private final CommentService commentService;
 
-    @GetMapping("/get/{movieId}")
+    @GetMapping("/{movieId}")
     public ResponseEntity<List<GetCommentResponse>> getCommentByMovieId(@PathVariable Long movieId) {
         return new ResponseEntity<>(commentService.getCommentByMovieId(movieId), HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<CreateCommentResponse> createComment(@RequestBody CreateCommentRequest request) {
         return new ResponseEntity<>(commentService.create(request), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
         commentService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<UpdateCommentResponse> updateComment(@RequestBody UpdateCommentRequest request) {
         return new ResponseEntity<>(commentService.updateComment(request), HttpStatus.OK);
     }

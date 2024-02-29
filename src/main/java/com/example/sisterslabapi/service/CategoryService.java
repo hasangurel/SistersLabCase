@@ -2,6 +2,8 @@ package com.example.sisterslabapi.service;
 
 import com.example.sisterslabapi.dto.converter.CategoryConverter;
 import com.example.sisterslabapi.dto.converter.MovieConverter;
+import com.example.sisterslabapi.exception.CategoryIdNotFoundException;
+import com.example.sisterslabapi.exception.Constant;
 import com.example.sisterslabapi.model.Category;
 import com.example.sisterslabapi.repository.CategoryRepository;
 import com.example.sisterslabapi.dto.request.category.CreateCategoryRequest;
@@ -9,14 +11,10 @@ import com.example.sisterslabapi.dto.request.category.UpdateCategoryRequest;
 import com.example.sisterslabapi.dto.response.category.CreateCategoryResponse;
 import com.example.sisterslabapi.dto.response.category.GetCategoryResponse;
 import com.example.sisterslabapi.dto.response.category.UpdateCategoryResponse;
-import com.example.sisterslabapi.dto.response.movie.GetMovieResponse;
-import com.example.sisterslabapi.dto.response.rating.GetRatingResponse;
-import com.example.sisterslabapi.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +43,7 @@ public class CategoryService {
     }
 
     public Category findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Id not found"));
+        return repository.findById(id).orElseThrow(() ->
+                new CategoryIdNotFoundException(Constant.CATEGORY_ID_NOT_FOUND));
     }
 }

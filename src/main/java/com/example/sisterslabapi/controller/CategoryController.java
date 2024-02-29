@@ -20,28 +20,28 @@ import java.util.List;
 public class CategoryController {
     private final CategoryService categoryService;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<CreateCategoryResponse> createCategory(@RequestBody CreateCategoryRequest request) {
         return new ResponseEntity<>(categoryService.create(request), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/movies")
+    @PutMapping("/movies")
     public ResponseEntity<UpdateCategoryResponse> updateCategory(@RequestBody UpdateCategoryRequest request) {
         return new ResponseEntity<>(categoryService.updateMovies(request), HttpStatus.OK);
     }
 
-    @PutMapping("/update/name")
+    @PutMapping("/name")
     public ResponseEntity<UpdateCategoryResponse> updateCategoryName(@RequestBody UpdateCategoryRequest request) {
         return new ResponseEntity<>(categoryService.updateNameById(request), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/All")
     public ResponseEntity<List<GetCategoryResponse>> getCategory() {
         return new ResponseEntity<>(categoryService.getAll(), HttpStatus.OK);
     }
