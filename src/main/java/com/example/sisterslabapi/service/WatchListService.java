@@ -6,6 +6,7 @@ import com.example.sisterslabapi.dto.response.watchList.CreateWatchListResponse;
 import com.example.sisterslabapi.dto.response.watchList.GetWatchListResponse;
 import com.example.sisterslabapi.dto.response.watchList.UpdateWatchListResponse;
 import com.example.sisterslabapi.exception.Constant;
+import com.example.sisterslabapi.exception.UserHasNotWatchListError;
 import com.example.sisterslabapi.exception.UserIdNotFoundException;
 import com.example.sisterslabapi.exception.WatchListIdNotFound;
 import com.example.sisterslabapi.model.User;
@@ -51,6 +52,9 @@ public class WatchListService {
 
     public List<GetWatchListResponse> getByUserID(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserIdNotFoundException(Constant.USER_ID_NOT_FOUND));
+        if (user.getWatchLists().isEmpty()) {
+            throw new UserHasNotWatchListError(Constant.USER_HAS_NOT_WATCH_LIST);
+        }
         return converter.convertEntityToGetAllResponse(user.getWatchLists());
     }
 

@@ -5,7 +5,6 @@ import com.example.sisterslabapi.dto.request.category.UpdateCategoryRequest;
 import com.example.sisterslabapi.dto.response.category.CreateCategoryResponse;
 import com.example.sisterslabapi.dto.response.category.GetCategoryResponse;
 import com.example.sisterslabapi.dto.response.category.UpdateCategoryResponse;
-import com.example.sisterslabapi.dto.response.movie.GetMovieResponse;
 import com.example.sisterslabapi.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,7 +26,7 @@ public class CategoryController {
 
     @PutMapping("/movies")
     public ResponseEntity<UpdateCategoryResponse> updateCategory(@RequestBody UpdateCategoryRequest request) {
-        return new ResponseEntity<>(categoryService.updateMovies(request), HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.update(request), HttpStatus.OK);
     }
 
     @PutMapping("/name")

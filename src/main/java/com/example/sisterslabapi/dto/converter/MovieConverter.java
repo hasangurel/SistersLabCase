@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -27,7 +28,7 @@ public class MovieConverter {
     public List<Movie> getAllById(List<Long> movieIds) {
         return movieIds.stream()
                 .map(this::findById)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public UpdateMovieResponse convertEntityToUpdateResponse(Movie movie) {

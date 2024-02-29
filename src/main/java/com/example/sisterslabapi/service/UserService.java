@@ -1,6 +1,8 @@
 package com.example.sisterslabapi.service;
 
 import com.example.sisterslabapi.dto.converter.UserConverter;
+import com.example.sisterslabapi.exception.Constant;
+import com.example.sisterslabapi.exception.UserIdNotFoundException;
 import com.example.sisterslabapi.model.User;
 import com.example.sisterslabapi.repository.UserRepository;
 import com.example.sisterslabapi.dto.request.user.CreateUserRequest;
@@ -45,6 +47,6 @@ public class UserService {
     }
 
     public User findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Id not found"));
+        return repository.findById(id).orElseThrow(() -> new UserIdNotFoundException(Constant.USER_ID_NOT_FOUND));
     }
 }

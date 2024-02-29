@@ -6,6 +6,8 @@ import com.example.sisterslabapi.dto.request.movie.UpdateMovieRequest;
 import com.example.sisterslabapi.dto.response.movie.CreateMovieResponse;
 import com.example.sisterslabapi.dto.response.movie.GetMovieResponse;
 import com.example.sisterslabapi.dto.response.movie.UpdateMovieResponse;
+import com.example.sisterslabapi.exception.Constant;
+import com.example.sisterslabapi.exception.MovieIdNotFoundException;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.model.Rating;
 import com.example.sisterslabapi.repository.CategoryRepository;
@@ -51,6 +53,6 @@ public class MovieService {
     }
 
     public Movie findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Movie not found."));
+        return repository.findById(id).orElseThrow(() -> new MovieIdNotFoundException(Constant.MOVIE_ID_NOT_FOUND));
     }
 }

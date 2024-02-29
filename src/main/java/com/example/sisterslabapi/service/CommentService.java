@@ -6,6 +6,7 @@ import com.example.sisterslabapi.dto.request.comment.UpdateCommentRequest;
 import com.example.sisterslabapi.dto.response.comment.CreateCommentResponse;
 import com.example.sisterslabapi.dto.response.comment.GetCommentResponse;
 import com.example.sisterslabapi.dto.response.comment.UpdateCommentResponse;
+import com.example.sisterslabapi.exception.CommentNotFoundException;
 import com.example.sisterslabapi.exception.Constant;
 import com.example.sisterslabapi.exception.MovieIdNotFoundException;
 import com.example.sisterslabapi.model.Comment;
@@ -27,7 +28,7 @@ public class CommentService {
 
     @Transactional
     public void deleteById(Long id) {
-        repository.deleteById(id);
+        repository.delete(findById(id));
     }
 
     public List<GetCommentResponse> getCommentByMovieId(Long movieId) {
@@ -44,6 +45,6 @@ public class CommentService {
     }
 
     public Comment findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Id not found"));
+        return repository.findById(id).orElseThrow(() -> new CommentNotFoundException(Constant.COMMENT_NOT_FOUND));
     }
 }

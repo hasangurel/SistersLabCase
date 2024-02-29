@@ -5,11 +5,11 @@ import com.example.sisterslabapi.dto.request.movie.UpdateMovieRequest;
 import com.example.sisterslabapi.dto.response.movie.CreateMovieResponse;
 import com.example.sisterslabapi.dto.response.movie.GetMovieResponse;
 import com.example.sisterslabapi.dto.response.movie.UpdateMovieResponse;
+import com.example.sisterslabapi.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.sisterslabapi.service.MovieService;
 
 import java.util.List;
 

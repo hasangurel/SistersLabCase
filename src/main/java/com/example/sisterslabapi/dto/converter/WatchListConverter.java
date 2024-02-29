@@ -6,7 +6,6 @@ import com.example.sisterslabapi.dto.response.watchList.GetWatchListResponse;
 import com.example.sisterslabapi.dto.response.watchList.UpdateWatchListResponse;
 import com.example.sisterslabapi.exception.Constant;
 import com.example.sisterslabapi.exception.UserAlreadyAddedThisMovieException;
-import com.example.sisterslabapi.exception.UserHasNotWatchListError;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.model.User;
 import com.example.sisterslabapi.model.WatchList;
@@ -27,6 +26,7 @@ public class WatchListConverter {
     private final UserConverter userConverter;
     private final MovieRepository movieRepository;
     private final UserRepository userRepository;
+
     public CreateWatchListResponse convertEntityToResponse(WatchList watchList) {
         repository.save(watchList);
         return CreateWatchListResponse.builder()
@@ -37,12 +37,13 @@ public class WatchListConverter {
                 .user(userConverter.convertEntityToGetResponse(watchList.getUser()))
                 .build();
     }
+
     public WatchList convertCreateRequestToEntity(CreateWatchListRequest request) {
         Movie movie = movieRepository.findById(request.movieId())
                 .orElseThrow(() -> new RuntimeException("Movie not found"));
         User user = userRepository.findById(request.userId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        if(repository.findByMovieAndUser(movie, user) != null) {
+        if (repository.findByMovieAndUser(movie, user) != null) {
             throw new UserAlreadyAddedThisMovieException(Constant.USER_ALREADY_ADD_THIS_WATCHLIST);
         }
         WatchList watchList = new WatchList();
@@ -52,6 +53,7 @@ public class WatchListConverter {
         watchList.setUser(user);
         return watchList;
     }
+
     public UpdateWatchListResponse convertEntityToUpdateResponse(WatchList watchList) {
         repository.save(watchList);
         return UpdateWatchListResponse.builder()
@@ -62,6 +64,7 @@ public class WatchListConverter {
                 .user(userConverter.convertEntityToGetResponse(watchList.getUser()))
                 .build();
     }
+
     public List<GetWatchListResponse> convertEntityToGetAllResponse(List<WatchList> watchLists) {
         return watchLists.stream()
                 .map(this::convertEntityToGetResponse)

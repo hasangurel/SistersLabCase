@@ -1,14 +1,12 @@
 package com.example.sisterslabapi.dto.request.user;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
 
 public record UpdateUserRequest(
         @NotNull Long id,
-         String name,
-         String username,
-         String email,
-         String password
+        String name,
+        String username,
+        String email,
+        String password
 ) {
 }

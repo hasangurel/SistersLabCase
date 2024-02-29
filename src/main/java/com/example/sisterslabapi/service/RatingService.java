@@ -6,6 +6,8 @@ import com.example.sisterslabapi.dto.request.rating.UpdateRatingRequest;
 import com.example.sisterslabapi.dto.response.rating.CreateRatingResponse;
 import com.example.sisterslabapi.dto.response.rating.GetRatingResponse;
 import com.example.sisterslabapi.dto.response.rating.UpdateRatingResponse;
+import com.example.sisterslabapi.exception.Constant;
+import com.example.sisterslabapi.exception.RatingNotFoundException;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.model.Rating;
 import com.example.sisterslabapi.repository.RatingRepository;
@@ -38,6 +40,6 @@ public class RatingService {
     }
 
     private Rating findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Id not found"));
+        return repository.findById(id).orElseThrow(() -> new RatingNotFoundException(Constant.Rating_NOT_FOUND));
     }
 }

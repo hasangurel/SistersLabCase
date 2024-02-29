@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface WatchListRepository extends JpaRepository<WatchList, Long> {
     void deleteAllByUser(User user);
+
     WatchList findByMovieAndUser(Movie movie, User user);
 }

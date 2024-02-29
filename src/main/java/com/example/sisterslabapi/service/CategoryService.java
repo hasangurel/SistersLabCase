@@ -11,6 +11,7 @@ import com.example.sisterslabapi.exception.CategoryIdNotFoundException;
 import com.example.sisterslabapi.exception.Constant;
 import com.example.sisterslabapi.model.Category;
 import com.example.sisterslabapi.repository.CategoryRepository;
+import com.example.sisterslabapi.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,20 +22,17 @@ import java.util.List;
 public class CategoryService {
     private final CategoryRepository repository;
     private final CategoryConverter converter;
-    private final MovieConverter movieConverter;
 
     public void deleteCategory(Long id) {
-        repository.deleteById(id);
+        repository.delete(findById(id));
     }
 
     public CreateCategoryResponse create(CreateCategoryRequest request) {
         return converter.convertEntityToCreateResponse(converter.convertCreateRequestToEntity(request));
     }
 
-    public UpdateCategoryResponse updateMovies(UpdateCategoryRequest request) {
-        findById(request.id()).setMovies(movieConverter.getAllById(request.movieIds()));
-        return converter.convertEntityToUpdateResponse(findById(request.id()));
-
+    public UpdateCategoryResponse update(UpdateCategoryRequest request) {
+        return converter.convertEntityToUpdateResponse(converter.convertUpdateToEntity(request));
     }
 
     public UpdateCategoryResponse updateNameById(UpdateCategoryRequest request) {
@@ -47,7 +45,6 @@ public class CategoryService {
     }
 
     public Category findById(Long id) {
-        return repository.findById(id).orElseThrow(() ->
-                new CategoryIdNotFoundException(Constant.CATEGORY_ID_NOT_FOUND));
+        return repository.findById(id).orElseThrow(() -> new CategoryIdNotFoundException(Constant.CATEGORY_ID_NOT_FOUND));
     }
 }
