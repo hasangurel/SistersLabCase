@@ -10,6 +10,7 @@ import com.example.sisterslabapi.dto.request.user.UpdateUserRequest;
 import com.example.sisterslabapi.dto.response.user.CreateUserResponse;
 import com.example.sisterslabapi.dto.response.user.GetUserResponse;
 import com.example.sisterslabapi.dto.response.user.UpdateUserResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class UserService {
     private final UserRepository repository;
     private final UserConverter converter;
 
+    @Transactional
     public void delete(Long id) {
         repository.delete(findById(id));
     }

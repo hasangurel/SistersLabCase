@@ -47,7 +47,7 @@ public class MovieController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
-        return new ResponseEntity<>(HttpStatus.CONFLICT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("MoviesByCategoryName/{name}")
