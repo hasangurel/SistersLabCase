@@ -1,19 +1,18 @@
 package com.example.sisterslabapi.dto.response.movie;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 
 import java.util.Date;
 
 @Builder
 public record CreateMovieResponse(
-        @NotBlank Long id,
+        Long id,
 
-        @NotBlank String name,
+        String name,
 
-        @NotBlank String description,
+        String description,
 
-        @NotBlank Date releaseDate
+        Date releaseDate
 
 
 ) {
