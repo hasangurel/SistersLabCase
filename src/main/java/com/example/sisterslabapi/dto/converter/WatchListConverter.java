@@ -12,6 +12,7 @@ import com.example.sisterslabapi.model.WatchList;
 import com.example.sisterslabapi.repository.MovieRepository;
 import com.example.sisterslabapi.repository.UserRepository;
 import com.example.sisterslabapi.repository.WatchListRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +28,7 @@ public class WatchListConverter {
     private final MovieRepository movieRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     public CreateWatchListResponse convertEntityToResponse(WatchList watchList) {
         repository.save(watchList);
         return CreateWatchListResponse.builder()
@@ -37,7 +39,7 @@ public class WatchListConverter {
                 .user(userConverter.convertEntityToGetResponse(watchList.getUser()))
                 .build();
     }
-
+    @Transactional
     public WatchList convertCreateRequestToEntity(CreateWatchListRequest request) {
         Movie movie = movieRepository.findById(request.movieId())
                 .orElseThrow(() -> new RuntimeException("Movie not found"));
@@ -53,7 +55,7 @@ public class WatchListConverter {
         watchList.setUser(user);
         return watchList;
     }
-
+    @Transactional
     public UpdateWatchListResponse convertEntityToUpdateResponse(WatchList watchList) {
         repository.save(watchList);
         return UpdateWatchListResponse.builder()

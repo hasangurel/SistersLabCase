@@ -7,6 +7,7 @@ import com.example.sisterslabapi.dto.response.user.GetUserResponse;
 import com.example.sisterslabapi.dto.response.user.UpdateUserResponse;
 import com.example.sisterslabapi.model.User;
 import com.example.sisterslabapi.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserConverter {
     private final UserRepository userRepository;
+
 
     public GetUserResponse convertEntityToGetResponse(User user) {
         return GetUserResponse.builder()
@@ -51,7 +53,7 @@ public class UserConverter {
         user.setUsername(request.username());
         return user;
     }
-
+    @Transactional
     public CreateUserResponse convertEntityToCreateResponse(User user) {
         userRepository.save(user);
         return CreateUserResponse.builder()
@@ -70,7 +72,7 @@ public class UserConverter {
         user.setUsername(request.username());
         return user;
     }
-
+    @Transactional
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Id not found"));
     }

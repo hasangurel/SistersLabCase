@@ -11,6 +11,7 @@ import com.example.sisterslabapi.model.User;
 import com.example.sisterslabapi.repository.MovieRepository;
 import com.example.sisterslabapi.repository.RatingRepository;
 import com.example.sisterslabapi.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +32,7 @@ public class RatingConverter {
                 .build();
     }
 
+    @Transactional
     public Rating convertCreateRatingRequestToEntity(CreateRatingRequest request) {
         Rating rating = new Rating();
         User user = userRepository.findById(request.userId()).orElseThrow(() -> new RuntimeException("User not found"));
@@ -57,6 +59,7 @@ public class RatingConverter {
                 .build()).toList();
     }
 
+    @Transactional
     public Rating convertUpdateRatingRequestToEntity(UpdateRatingRequest request) {
         Rating rating = ratingRepository.findByUserIdAndMovieId(request.userId(), request.movieId());
         rating.setRating(request.rating());

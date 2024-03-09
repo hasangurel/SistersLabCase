@@ -13,6 +13,7 @@ import com.example.sisterslabapi.model.Category;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.repository.CategoryRepository;
 import com.example.sisterslabapi.repository.MovieRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,7 @@ public class CategoryConverter {
     private final MovieConverter movieConverter;
     private final MovieRepository movieRepository;
 
+    @Transactional
     public Category convertCreateRequestToEntity(CreateCategoryRequest request) {
         if (repository.findByName(request.name()) != null) {
             throw new CategoryAlreadyExistException("Category already exists");
@@ -34,6 +36,7 @@ public class CategoryConverter {
         return category;
     }
 
+    @Transactional
     public CreateCategoryResponse convertEntityToCreateResponse(Category category) {
         repository.save(category);
         return CreateCategoryResponse.builder()
@@ -42,6 +45,7 @@ public class CategoryConverter {
                 .build();
     }
 
+    @Transactional
     public UpdateCategoryResponse convertEntityToUpdateResponse(Category category) {
         if (category.getId() == null) {
             throw new CategoryNotFoundException(Constant.CATEGORY_NOT_FOUND);
@@ -69,6 +73,7 @@ public class CategoryConverter {
                 .toList();
     }
 
+    @Transactional
     public Category convertUpdateToEntity(UpdateCategoryRequest request) {
         Category category = findById(request.id());
         if (request.name() != null) {
@@ -79,6 +84,7 @@ public class CategoryConverter {
         return category;
     }
 
+    @Transactional
     public Category findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new CategoryIdNotFoundException(Constant.CATEGORY_ID_NOT_FOUND));

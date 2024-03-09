@@ -8,6 +8,7 @@ import com.example.sisterslabapi.dto.response.movie.UpdateMovieResponse;
 import com.example.sisterslabapi.dto.response.rating.GetRatingResponse;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.repository.MovieRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,19 +19,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MovieConverter {
     private final MovieRepository repository;
-
+    @Transactional
     public List<GetMovieResponse> convertEntityToGetAllResponse(List<Movie> movies) {
         return movies.stream()
                 .map(this::convertEntityToGetResponse)
                 .toList();
     }
-
-    public List<Movie> getAllById(List<Long> movieIds) {
-        return movieIds.stream()
-                .map(this::findById)
-                .collect(Collectors.toList());
-    }
-
+    @Transactional
     public UpdateMovieResponse convertEntityToUpdateResponse(Movie movie) {
         return UpdateMovieResponse.builder()
                 .id(movie.getId())
@@ -43,7 +38,7 @@ public class MovieConverter {
                         .toList())
                 .build();
     }
-
+    @Transactional
     public Movie convertUpdateRequestToEntity(UpdateMovieRequest request) {
         Movie movie = findById(request.id());
         movie.setDescription(request.description());
@@ -51,7 +46,7 @@ public class MovieConverter {
         movie.setName(request.name());
         return movie;
     }
-
+    @Transactional
     public Movie convertCreateRequestToEntity(CreateMovieRequest request) {
         Movie movie = new Movie();
         movie.setDescription(request.description());
@@ -59,7 +54,7 @@ public class MovieConverter {
         movie.setName(request.name());
         return movie;
     }
-
+    @Transactional
     public CreateMovieResponse convertEntityToResponse(Movie movie) {
         return CreateMovieResponse.builder()
                 .id(movie.getId())
@@ -68,7 +63,7 @@ public class MovieConverter {
                 .releaseDate(movie.getReleaseDate())
                 .build();
     }
-
+    @Transactional
     public GetMovieResponse convertEntityToGetResponse(Movie movie) {
         return GetMovieResponse.builder()
                 .id(movie.getId())
@@ -82,7 +77,7 @@ public class MovieConverter {
                 .build();
 
     }
-
+    @Transactional
     public Movie findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Id not found"));
     }

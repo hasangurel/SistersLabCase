@@ -23,7 +23,7 @@ public class CategoryController {
     public ResponseEntity<CreateCategoryResponse> createCategory(@RequestBody CreateCategoryRequest request) {
         return new ResponseEntity<>(categoryService.create(request), HttpStatus.CREATED);
     }
-
+// burada id yi direkt domain üzerinden de çekilebilir mi?
     @PutMapping("/movies")
     public ResponseEntity<UpdateCategoryResponse> updateCategory(@RequestBody UpdateCategoryRequest request) {
         return new ResponseEntity<>(categoryService.update(request), HttpStatus.OK);
