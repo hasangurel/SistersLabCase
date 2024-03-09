@@ -5,7 +5,10 @@ import com.example.sisterslabapi.dto.request.category.UpdateCategoryRequest;
 import com.example.sisterslabapi.dto.response.category.CreateCategoryResponse;
 import com.example.sisterslabapi.dto.response.category.GetCategoryResponse;
 import com.example.sisterslabapi.dto.response.category.UpdateCategoryResponse;
-import com.example.sisterslabapi.exception.*;
+import com.example.sisterslabapi.exception.CategoryAlreadyExistException;
+import com.example.sisterslabapi.exception.CategoryIdNotFoundException;
+import com.example.sisterslabapi.exception.CategoryNotFoundException;
+import com.example.sisterslabapi.exception.Constant;
 import com.example.sisterslabapi.model.Category;
 import com.example.sisterslabapi.model.Movie;
 import com.example.sisterslabapi.repository.CategoryRepository;
@@ -67,22 +70,13 @@ public class CategoryConverter {
     }
 
     public Category convertUpdateToEntity(UpdateCategoryRequest request) {
-        checkMovieInCategory(request);
         Category category = findById(request.id());
         if (request.name() != null) {
             category.setName(request.name());
         }
-        Movie movie = movieRepository.findById(request.id()).orElseThrow(() -> new RuntimeException("Movie not found."));
+        Movie movie = movieRepository.findById(request.movieId()).orElseThrow(() -> new RuntimeException("Movie not found."));
         category.getMovies().add(movie);
         return category;
-    }
-
-    public void checkMovieInCategory(UpdateCategoryRequest request) {
-        if (request.movieId() == null) {
-            throw new RuntimeException("Movie Ids cannot be empty");
-        }
-        movieRepository.findById(request.movieId())
-                .orElseThrow(() -> new MovieIdNotFoundException(Constant.MOVIE_ID_NOT_FOUND));
     }
 
     public Category findById(Long id) {
