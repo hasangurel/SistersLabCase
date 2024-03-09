@@ -8,7 +8,6 @@ import java.util.List;
 @Builder
 public record CreateCategoryResponse(
          Long id,
-         String name,
-         List<GetMovieResponse> movies
+         String name
 ) {
 }

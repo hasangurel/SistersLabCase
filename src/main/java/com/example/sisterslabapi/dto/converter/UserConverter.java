@@ -44,13 +44,14 @@ public class UserConverter {
                 .password(user.getPassword())
                 .build();
     }
-
+    @Transactional
     public User convertUpdateRequestToEntity(UpdateUserRequest request) {
         User user = findById(request.id());
         user.setEmail(request.email());
         user.setName(request.name());
         user.setPassword(request.password());
         user.setUsername(request.username());
+        userRepository.save(user);
         return user;
     }
     @Transactional
